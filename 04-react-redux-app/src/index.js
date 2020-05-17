@@ -4,8 +4,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import configureStore from './redux/configureStore';
+import { Provider as ReduxProvider } from 'react-redux';
 
-// myGlobal = 4; // this line will trigger eslint error
+// myGlobal = 4; // this line will trigger eslint error when npm start
 
 // function HelloWorld() {
 //   // debugger;
@@ -13,12 +15,16 @@ import './index.css';
 //   return <p>Hello World</p>;
 // }
 
-// I AM JUST ANOTHER COMMENT
+// it can be useful to pass initial state into the store here
+// if you're server rendering or initializing Redux store with data from localstorage
+const store = configureStore();
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <ReduxProvider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </ReduxProvider>,
   document.getElementById('app')
 );
 // ReactDOM.render(<HelloWorld />, app); // this works too
